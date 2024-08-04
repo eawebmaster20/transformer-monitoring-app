@@ -1,0 +1,24 @@
+{
+  "name": "transformer-monitoring",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eawebmaster20/transformer-monitoring-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eawebmaster20/transformer-monitoring-app/issues"
+  },
+  "homepage": "https://github.com/eawebmaster20/transformer-monitoring-app#readme",
+  "description": "",
+  "dependencies": {
+    "electron": "^31.3.1",
+    "serialport": "^10.3.0"
+  }
+}
