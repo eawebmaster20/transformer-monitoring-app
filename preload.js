@@ -9,8 +9,8 @@ window.addEventListener('DOMContentLoaded',()=>{
         }
     }
     let counter = 0
-    document.getElementById('add').addEventListener('click',()=>{
-        counter++;
-        document.getElementById('spanLabel').innerText = counter
-    })
+    // document.getElementById('add').addEventListener('click',()=>{
+    //     counter++;
+    //     document.getElementById('spanLabel').innerText = counter
+    // })
 })
