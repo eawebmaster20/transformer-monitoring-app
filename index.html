@@ -7,43 +7,106 @@
     <title>Transformer monitoring services</title>
 </head>
 <body>
-    <div class="container">
-        <div class="transformer-info">
-            <div class="meter-screen">
-                <span class="voltage">
-                    <span class="symbol">Voltage:</span>
-                    <span class="value">
-                        <span id="voltage" class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
-                <span class="current">
-                    <span class="symbol">Current:</span>
-                    <span class="value">
-                        <span id="current" class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
-                <span class="power">
-                    <span class="symbol">Power:</span>
-                    <span class="value">
-                        <span id="power" class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
-                <span class="temperature">
-                    <span class="symbol">Temp:</span>
-                    <span class="value">
-                        <span id="temp" class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
+    <div class="container-main dark-mode">
+        <section class="section-1">
+            <div class="info">
+                <h1>Monitor Transformers</h1>
+                <h4>Get real time data on the performance of transformers</h4>
+                <div class="action-btn">
+                    <button>Add Transformer</button>
+                    <button class="icon-btn"><img src="assets//arrow-up-right.svg" alt="" srcset=""></button>
+                </div>
             </div>
-        </div>
-        <div class="transformer-img">
-            <img src="assets/transformer.png" alt="transformer image" srcset="">
-        </div>
+            <div class="card1">
+                <div class="card-header">
+                    <div class="over-voltage-icon">
+                        <img src="assets/over-voltage.svg" alt="" srcset="">
+                    </div>
+                    <h4>Over Voltage Transformers</h4>
+                </div>
+                <div class="card-info">
+                    <span class="text">
+                        <h1>45</h1>
+                        <p>Transformers</p>
+                    </span>
+                    <img src="assets/graph-icon.svg" alt="" srcset="">
+                </div>
+                <div class="card-action">
+                    <span>
+                        <span class="muted-text">
+                            Last Updated
+                        </span>
+                        <p>24th August, 2024</p>
+                    </span>
+                    <button class="icon-btn"><img src="assets//arrow-up-right.svg" alt="" srcset=""></button>
+                </div>
+            </div>
+            <div class="card2">
+                <div class="card-header">
+                    <div class="over-voltage-icon">
+                        <img src="assets/over-voltage.svg" alt="" srcset="">
+                    </div>
+                    <h4>Under Voltage Transformers</h4>
+                </div>
+                <div class="card-info">
+                    <span class="text">
+                        <h1>120</h1>
+                        <p>Transformers</p>
+                    </span>
+                    <img src="assets/graph-icon.svg" alt="" srcset="">
+                </div>
+                <div class="card-action">
+                    <span>
+                        <span class="muted-text">
+                            Last Updated
+                        </span>
+                        <p>24th August, 2024</p>
+                    </span>
+                    <button class="icon-btn"><img src="assets//arrow-up-right.svg" alt="" srcset=""></button>
+                </div>
+            </div>
+        </section>
     </div>
     <script src="index.js"></script>
 </body>
 </html>
+
+
+<!-- old page -->
+<!-- <div class="container">
+    <div class="transformer-info">
+        <div class="meter-screen">
+            <span class="voltage">
+                <span class="symbol">Voltage:</span>
+                <span class="value">
+                    <span id="voltage" class="readings">0.0000</span>
+                    <span class="symbol">A</span>
+                </span>
+            </span>
+            <span class="current">
+                <span class="symbol">Current:</span>
+                <span class="value">
+                    <span id="current" class="readings">0.0000</span>
+                    <span class="symbol">A</span>
+                </span>
+            </span>
+            <span class="power">
+                <span class="symbol">Power:</span>
+                <span class="value">
+                    <span id="power" class="readings">0.0000</span>
+                    <span class="symbol">A</span>
+                </span>
+            </span>
+            <span class="temperature">
+                <span class="symbol">Temp:</span>
+                <span class="value">
+                    <span id="temp" class="readings">0.0000</span>
+                    <span class="symbol">A</span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="transformer-img">
+        <img src="assets/transformer.png" alt="transformer image" srcset="">
+    </div>
+</div> -->

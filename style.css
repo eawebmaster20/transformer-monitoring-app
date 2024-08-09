@@ -1,14 +1,56 @@
 :root{
     --dark-bg:#000000c8;
 }
+.dark-mode{
+    color: white;
+}
 body{
     margin: 0;
     width: 100vw;
     height: 100vh;
+    background-image: url('assets//bg-grid.svg');
     background-color: var(--dark-bg);
 }
+h1{
+    font-size: 62px;
+    font-weight: 700;
+    line-height: 75px;
+    margin: 1rem 0;
+}
+h4{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+.container-main{
+    display: flex;
+}
+.section-1{
+    width: 100%;
+    justify-content: space-between;
+}
+.section-1, .info, .card1, .card2{
+    display: flex;
+}
 
-.container{
+.info, .card1, .card2{
+    flex-direction: column;
+}
+.info .h1{
+    max-width: 40%;
+}
+
+.action-btn button{
+    height: 60px;
+    background-color: #D0FF71;
+    border: none;
+    border: 30px;
+}
+
+
+
+
+/* .container{
     display: grid;
     grid-template-columns: 50% 50%;
     width: 100%;
@@ -37,4 +79,4 @@ body{
 .voltage, .current, .power, .temperature{
     display: flex;
     justify-content: space-between;
-}
+} */
