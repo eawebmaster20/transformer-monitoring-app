@@ -1,49 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document bfgh</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="transformer-info">
-            <div class="meter-screen">
-                <span class="voltage">
-                    <span class="symbol">Voltage:</span>
-                    <span class="value">
-                        <span class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
-                <span class="current">
-                    <span class="symbol">Current:</span>
-                    <span class="value">
-                        <span class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
-                <span class="power">
-                    <span class="symbol">Power:</span>
-                    <span class="value">
-                        <span class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
-                <span class="temperature">
-                    <span class="symbol">Temp:</span>
-                    <span class="value">
-                        <span class="readings">0.0000</span>
-                        <span class="symbol">A</span>
-                    </span>
-                </span>
+      <h1 class="titletext">Transformers</h1>
+      <!-- first section  -->
+      <div class="monitorContainer">
+        <div class="info addcontainer">
+          <h1>Monitor Transformers</h1>
+          <p>
+            Get real time data on the performance of <br />
+            transformers
+          </p>
+          <div class="buttonwrapper">
+            <button>Add transformer</button>
+            <span>
+              <img src="/assets/images/arrowForward.png" alt="" />
+            </span>
+          </div>
+        </div>
+        <div class="info voltage">
+          <div class="header">
+            <div class="volticonwrapp">
+              <img src="/assets/images/flash1.png" alt="" />
             </div>
+            High Voltage transformers
+          </div>
+          <div class="transformerInfo">
+            <div class="transformernumber">
+              <h1>45</h1>
+              <p>Transformers</p>
+            </div>
+            <div class="transformergraph">
+              <img src="/assets/images/Group 289216.png" alt="" />
+            </div>
+          </div>
+          <div class="footer">
+            <div class="update">
+              <p>last Updated</p>
+              24th August, 2024
+            </div>
+            <div class="arrowwrapp">
+              <span>
+                <svg
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.851 20.2831L23.851 11.3723L14.9402 11.3723"
+                    stroke="#D0FF71"
+                    stroke-width="1.38688"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17.0102 18.2132L23.8511 11.3723"
+                    stroke="#D0FF71"
+                    stroke-width="1.38688"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.4979 23.7256L14.0522 21.1712"
+                    stroke="#D0FF71"
+                    stroke-width="1.38688"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
         </div>
-        <div class="transformer-img">
-            <img src="assets/transformer.png" alt="transformer image" srcset="">
+        <div class="info voltage">
+          <div class="header">
+            <div class="volticonwrapp">
+              <img src="/assets/images/flash.png" alt="" />
+            </div>
+            Under Voltage transformers
+          </div>
+          <div class="transformerInfo">
+            <div class="transformernumber">
+              <h1>45</h1>
+              <p>Transformers</p>
+            </div>
+            <div class="transformergraph">
+              <img src="/assets/images/Group blue.png" alt="" />
+            </div>
+          </div>
+          <div class="footer">
+            <div class="update">
+              <p>last Updated</p>
+              24th August, 2024
+            </div>
+            <div class="arrowwrapp">
+              <span>
+                <svg
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M23.851 20.2831L23.851 11.3723L14.9402 11.3723"
+                    stroke="#D0FF71"
+                    stroke-width="1.38688"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17.0102 18.2132L23.8511 11.3723"
+                    stroke="#D0FF71"
+                    stroke-width="1.38688"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M11.4979 23.7256L14.0522 21.1712"
+                    stroke="#D0FF71"
+                    stroke-width="1.38688"
+                    stroke-miterlimit="10"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
