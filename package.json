@@ -18,6 +18,7 @@
   "homepage": "https://github.com/eawebmaster20/transformer-monitoring-app#readme",
   "description": "",
   "dependencies": {
+    "bootstrap": "^5.3.3",
     "electron": "^31.3.1",
     "serialport": "^10.3.0"
   }
