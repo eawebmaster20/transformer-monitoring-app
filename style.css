@@ -1,47 +1,151 @@
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  line-height: calc(1em + 0.5rem);
+:root{
+    /* --dark-bg:#1B1A1A; */
+    --dark-bg:#121212;
+    --transparent-bg:#000000c8;
+    --card-bg:#232222;
 }
-img {
-  max-width: 100%;
-  display: block;
-  object-fit: cover;
+.dark-mode{
+    color: white;
+}
+body{
+    margin: 0;
+    height: 100vh;
+    background-image: url('assets//bg-grid.svg');
+    background-color: var(--dark-bg);
+}
+h1{
+    font-size: 62px;
+    font-weight: 700;
+    line-height: 75px;
+    margin: 1rem 0;
+}
+h4{
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+}
+.container-main{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+.section-1, .section-2{
+    width: 100%;
+    gap: 1rem;
+}
+.section-1, .info, .card1, .card2{
+    display: flex;
 }
 
-/* container */
-.container {
-  /* border: 2px solid red; */
-  background-color: black;
-  min-height: 100vh;
-  color: white;
+.info, .card1, .card2{
+    flex-direction: column;
+}
+.card-data{
+    margin: 1.5rem;
+}
+.card1, .card2{
+    border-radius: 2rem;
+    width: 32%;
+    min-width: 288px;
+    max-width: 500px;
+    background-color: var(--card-bg);
 }
 
-/* transformers text */
-.titletext {
-  padding-inline: 4rem;
-  font-size: 1.1rem;
-  margin-block-end: 2.5rem;
+.info .h1{
+    /* max-width: 40%; */
+}
+.action-btn{
+    display: flex;
+}
+.action-btn button{
+    height: 60px;
+    background-color: #D0FF71;
+    border: none;
+}
+.action-btn :first-child{
+    border-radius: 30px;
+    padding: 0 32px;
+}
+.action-btn :last-child{
+    padding: 0;
+    margin-left: -16px;
+}
+.action-btn :last-child img{
+    margin: 0 !important;
+}
+.icon-btn{
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-color: transparent;
+    border: 1px solid var(--dark-bg);
+    background-color: var(--dark-bg);
 }
 
-/* first section transformer Monitor */
-.monitorContainer {
-  /* border: 2px solid red; */
-  padding-inline: 4rem;
-  min-height: 20rem;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+.card-header{
+    display: flex;
+    align-items: center;
 }
-/* this applies to al 3 cards */
-.info {
-  width: 30%;
-  /* border: 2px solid orangered; */
-  border-radius: 2rem;
+
+.over-voltage-icon{
+    width: 23px;
+    height: 23px;
+    display: flex;
+    padding: 5px;
+    border: 1px solid var(--dark-bg);
+    border-radius: 50%;
+    background-color: var(--dark-bg);
+}
+
+.card-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-action{
+    display: flex;
+    justify-content: space-between;
+}
+.card-action-txt {
+    background-color: var(--dark-bg);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+.card-action :first-child span p{
+    margin: 0;
+}
+
+.section-2 thead{
+    background-color: #203238;
+}
+.section-2 .table{
+    margin-top: 2rem;
+    border: 1.5px solid #2E2E2E;
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: #101010;
+}
+.section-2 tr{
+    height: 64px;
+    border: none;
+}
+table, th, td{
+    border-collapse: collapse;
+    border-bottom: 1px solid #101010
+}
+.section-2 table{
+}
+.section-2 tbody tr:nth-child(even){
+    background-color: #151515;
+}
+.section-2 tbody tr:nth-child(odd){
+    background-color: #1E1E1E;
+}
+/* .container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    height: 100%;
 }
 
 /* first card (add transformer card) */
@@ -120,35 +224,7 @@ span {
   border-radius: 100vw;
 }
 
-.transformerInfo {
-  height: 40%;
-  /* border: 2px solid green; */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.transformernumber > h1 {
-  font-size: 3.5rem;
-}
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.update {
-  width: 50%;
-  flex-shrink: 0;
-  padding: 0.5rem;
-  border-radius: 0.7rem;
-  background-color: #1b1a1a;
-  border: 1px solid #2d2d2d;
-}
-
-.arrowwrapp > span {
-  background-color: #1b1a1a;
-  transform: rotate(-5deg);
-  border: 1px solid #2d2d2d;
-}
+.voltage, .current, .power, .temperature{
+    display: flex;
+    justify-content: space-between;
+} */
