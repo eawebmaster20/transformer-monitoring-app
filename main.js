@@ -1,81 +1,55 @@
-const {app, BrowserWindow,Menu} = require ('electron');
-const path = require('node:path')
-const createWindow = ()=>{
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences:{
-            nodeIntegration: true, // to allow require
-            contextIsolation: false, 
-            preload:path.join(__dirname, 'preload.js')
-        }
-    })
-    win.loadFile('index.html')
-}
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const { SerialPort } = require('serialport');
+const { DelimiterParser } = require('@serialport/parser-delimiter');
 
-/******************************
- * create custom menu bar
- ******************************/
-const isMac =process.platform === 'darwin';
-const template = [
-    {
-      label: 'File',
-      submenu: [
-        isMac ? { role: 'close' } : { role: 'quit' }
-      ]
+// Create the main window
+let mainWindow;
+
+app.on('ready', () => {
+  mainWindow = new BrowserWindow({
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      enableRemoteModule: false,
     },
-    {
-      label: 'Edit',
-      submenu: [
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { role: 'delete' },
-        { role: 'selectAll' }
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [
-        { role: 'reload' },
-        { role: 'forceReload' },
-        { role: 'toggleDevTools' },
-        { role: 'togglefullscreen' }
-      ]
-    },
-    {
-      role: 'help',
-      submenu: [
-        {
-          label: 'Learn More',
-          click: async () => {
-            const { shell } = require('electron')
-            await shell.openExternal('https://electronjs.org')
-          }
-        }
-      ]
+  });
+
+  mainWindow.loadFile('index.html');
+});
+
+// Handle port listing
+ipcMain.handle('list-ports', async () => {
+  const ports = await SerialPort.list();
+  return ports.map(port => ({ path: port.path, manufacturer: port.manufacturer }));
+});
+
+// Handle port opening
+let currentPort;
+
+ipcMain.handle('open-port', async (event, { path, baudRate }) => {
+  if (currentPort) currentPort.close(); // Close any previously opened port
+
+  currentPort = new SerialPort({ path, baudRate });
+
+  return new Promise((resolve, reject) => {
+    currentPort.on('open', () => resolve({ success: true }));
+    currentPort.on('error', err => reject({ success: false, error: err.message }));
+  });
+});
+
+// Relay serial data to renderer
+ipcMain.on('start-reading', (event, delimiter) => {
+    if (!currentPort) {
+      event.sender.send('error', 'No port is open');
+      return;
     }
-  ]
   
-//   const menu = Menu.buildFromTemplate(template)
-  const menu = Menu.buildFromTemplate([{
-    label: 'View',
-    submenu: [
-      { role: 'toggleDevTools' }
-    ]
-  },])
-  Menu.setApplicationMenu(menu)
-  /*****************************************
-   * end menu creation
-   ****************************************/
-
+    const { DelimiterParser } = require('@serialport/parser-delimiter');
+    const parser = currentPort.pipe(new DelimiterParser({ delimiter }));
   
-app.whenReady().then(()=>{
-    createWindow();
-    app.on('activate',()=>{
-        BrowserWindow.getAllWindows().length ===0 ? createWindow(): '';
-    })
-})
-app.on('window-all-closed', ()=>{
-    process.platform === 'darwin' ? '':app.quit()
-})
+    parser.on('data', data => {
+      mainWindow.webContents.send('serial-data', data.toString());
+      console.log(data);
+    });
+  });
