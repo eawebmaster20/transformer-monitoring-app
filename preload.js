@@ -1,16 +1,9 @@
-window.addEventListener('DOMContentLoaded',()=>{
-    const replaceText = (selector, text)=>{
-        const element = document.getElementById(selector)
-        if (element) {
-            element.innerText = text
-        }
-        for (const dependency of ['chrome','node', 'electron']) {
-            replaceText(`${dependency}-version`,process.versions[dependency])
-        }
-    }
-    let counter = 0
-    // document.getElementById('add').addEventListener('click',()=>{
-    //     counter++;
-    //     document.getElementById('spanLabel').innerText = counter
-    // })
-})
+const { contextBridge, ipcRenderer } = require('electron');
+
+// Expose Electron APIs to the renderer process
+contextBridge.exposeInMainWorld('serialAPI', {
+  listPorts: () => ipcRenderer.invoke('list-ports'),
+  openPort: (options) => ipcRenderer.invoke('open-port', options),
+  startReading: (delimiter) => ipcRenderer.send('start-reading', delimiter),
+  onSerialData: (callback) => ipcRenderer.on('serial-data', (event, data) => callback(data)),
+});
