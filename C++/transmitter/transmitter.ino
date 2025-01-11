@@ -23,4 +23,9 @@ void loop() {
     // Write data to the serial monitor
     Serial.write(receivedChar);
   }
+
+  if(Serial.available()){
+    char receivedChar = Serial.read();
+    Serial.print(receivedChar);
+  }
 }

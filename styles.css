@@ -1,0 +1,49 @@
+:root{
+    --dark-bg:#1B1A1A;
+    /* --dark-bg:#121212; */
+    --transparent-bg:#000000c8;
+    --table-even-bg:#363434;
+    --card-bg:#232222;
+    --table-header-bg:#203238;
+
+    --height:100vh;
+}
+.dark-mode{
+    color: white;
+}
+body{
+    margin: 0;
+    height: 100%;
+    background-image: url('assets//bg-grid.svg');
+    background-color: var(--dark-bg);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+#transformer{
+    margin: 2rem 2rem auto 2rem;
+}
+
+#transformerTable tbody tr:nth-child(even){
+    background-color: var(--table-even-bg);
+}
+
+table, th, td{
+    border-collapse: collapse;
+    border-bottom: 1px solid #101010
+}
+
+thead{
+    background-color: var(--table-header-bg);
+}
+
+
+#connection{
+    fill: red;
+}

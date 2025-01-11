@@ -16,7 +16,7 @@ void setup() {
 
   // Inform that the system is ready
   // Serial.println("System Initialized");
-  BTSerial.println("Bluetooth Ready");
+  BTSerial.println("Bluetooth transmitter Ready");
 }
 
 void loop() {
@@ -30,12 +30,13 @@ void loop() {
   // Create a data string to send
   String data = String(I) + " " + String(V) + " " + String(P);
 
-  // Print the values to the serial monitor
-  Serial.println(data);
 
   // Send the data over Bluetooth
   BTSerial.println(data);
 
+  // Print the values to the serial monitor
+  Serial.println("data sent");
+
   // Wait for 2 seconds before the next iteration
-  delay(15000);
+  delay(5000);
 }

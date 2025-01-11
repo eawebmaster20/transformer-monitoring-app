@@ -16,6 +16,7 @@ app.on('ready', () => {
   });
 
   mainWindow.loadFile('index.html');
+  mainWindow.webContents.openDevTools();
 });
 
 // Handle port listing
@@ -53,3 +54,25 @@ ipcMain.on('start-reading', (event, delimiter) => {
       console.log(data);
     });
   });
+
+
+ let portMonitorInterval;
+ipcMain.on('start-port-monitoring', () => {
+ // Check ports every second
+ portMonitorInterval = setInterval(async () => {
+   try {
+     const ports = await SerialPort.list();
+     ports.forEach(port => {
+       mainWindow.webContents.send('port-available', port);
+     });
+   } catch (error) {
+     console.error('Error monitoring ports:', error);
+   }
+ }, 1000);
+} );
+ipcMain.on('stop-port-monitoring', () => {
+ if (portMonitorInterval) {
+   clearInterval(portMonitorInterval);
+ }
+});
+

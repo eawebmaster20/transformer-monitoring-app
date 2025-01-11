@@ -10,7 +10,7 @@
 body{
     margin: 0;
     height: 100vh;
-    background-image: url('assets//bg-grid.svg');
+    background-image: url('assets/bg-grid.svg');
     background-color: var(--dark-bg);
 }
 h1{
@@ -82,6 +82,11 @@ h4{
     background-color: var(--dark-bg);
 }
 
+.bg-transparent{
+    background-image: none;
+    padding: 0;
+}
+
 .card-header{
     display: flex;
     align-items: center;
@@ -133,8 +138,7 @@ table, th, td{
     border-collapse: collapse;
     border-bottom: 1px solid #101010
 }
-.section-2 table{
-}
+
 .section-2 tbody tr:nth-child(even){
     background-color: #151515;
 }
@@ -184,20 +188,7 @@ button {
   cursor: pointer;
   width: 45%;
 }
-span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 100vw;
-  background-color: #d0ff71;
-  margin-inline-start: -0.5rem;
-  transform: rotate(-45deg);
-  transition: transform 0.5s ease-in-out;
-}
 
-/* high voltage and lowvoltage card */
 
 .voltage {
   display: flex;
