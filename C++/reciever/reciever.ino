@@ -3,10 +3,6 @@
 // Create a software serial object for Bluetooth communication
 SoftwareSerial BTSerial(11, 12); // RX, TX (Connect to HC-05 TX, RX pins)
 
-int I = 0; // Current in milliamps
-int V = 0; // Voltage in millivolts
-int P = 0; // Power in milliwatts
-
 void setup() {
   // Initialize hardware serial for debugging
   Serial.begin(9600);
@@ -15,28 +11,32 @@ void setup() {
   BTSerial.begin(9600);
 
   // Inform that the system is ready
-  // Serial.println("System Initialized");
+  Serial.println("System Initialized");
   BTSerial.println("Bluetooth transmitter Ready");
 }
 
 void loop() {
-  // Generate random values for current and voltage
-  I = random(10, 20); // Random current between 10mA and 20mA
-  V = random(220, 240); // Random voltage between 220mV and 240mV
-  P = random(31, 45); // Random voltage between 220mV and 240mV
+  // Check if data is available on the Serial monitor
+  if (Serial.available()) {
+    // Read the input from Serial
+    String input = Serial.readStringUntil('\n'); // Read until newline character
+    
+    // Send the input data to the Bluetooth device
+    BTSerial.println(input);
 
-  // Calculate power (P = I * V / 1000 to convert to milliwatts)
+    // Print confirmation to the Serial monitor
+    Serial.println("Sent to Bluetooth: " + input);
+  }
 
-  // Create a data string to send
-  String data = String(I) + " " + String(V) + " " + String(P);
+  // Check if data is available from Bluetooth
+  if (BTSerial.available()) {
+    // Read the input from Bluetooth
+    String btInput = BTSerial.readStringUntil('\n'); // Read until newline character
 
+    // Print the received data to the Serial monitor
+    Serial.println("Received from Bluetooth: " + btInput);
+  }
 
-  // Send the data over Bluetooth
-  BTSerial.println(data);
-
-  // Print the values to the serial monitor
-  Serial.println("data sent");
-
-  // Wait for 2 seconds before the next iteration
-  delay(5000);
+  // Add a small delay to avoid flooding the serial communication
+  delay(100);
 }
