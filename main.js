@@ -10,7 +10,7 @@ let currentPort;
 let socket;
 
 function connectSocket() {
-  socket = socketIOClient('http://localhost:3000'); // Connect to Socket.IO server on localhost:3000
+  socket = socketIOClient('https://node-socketio-production-cf7a.up.railway.app'); // Connect to Socket.IO server on localhost:3000
 
   socket.on('connect', () => {
     console.log('Connected to Socket.IO server');
