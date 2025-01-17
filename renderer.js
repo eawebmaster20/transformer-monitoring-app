@@ -41,15 +41,26 @@ document.addEventListener('DOMContentLoaded', async () => {
       'DT1', 'TTU Capus', current, voltage, temperature
      ])
      table.draw()
+	const payload = {}
+	if (undervoltage){
+	     payload = {
+	      notification: {
+	          title:'UnderVoltage Notification',
+	          body: `DT voltage has fallen to ${voltage}`
+	          },
+	      topic:'general'
+	      }	
+	}
+	if (overvoltage){
+	     payload = {
+	      notification: {
+	          title:'OverVoltage Notification',
+	          body: `DT voltage has Risen to ${voltage}`
+	          },
+	      topic:'general'
+	      }	
+	}
 
-
-     const payload = {
-      notification: {
-          title:'Registration notification',
-          body: 'lets see if it worked or not'
-          },
-      topic:'general'
-      }
       
     });
 
