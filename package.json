@@ -4,7 +4,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-packager . transformer-monitoring --platform=win32 --arch=x64 --out=dist --overwrite"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,14 @@
   "homepage": "https://github.com/eawebmaster20/transformer-monitoring-app#readme",
   "description": "",
   "dependencies": {
+    "@serialport/parser-delimiter": "^12.0.0",
+    "bootstrap": "^5.3.3",
+    "datatables.net-dt": "^2.1.8",
+    "firebase-admin": "^13.0.1",
+    "serialport": "^10.5.0"
+  },
+  "devDependencies": {
     "electron": "^31.3.1",
-    "serialport": "^10.3.0"
+    "electron-packager": "^17.1.2"
   }
 }

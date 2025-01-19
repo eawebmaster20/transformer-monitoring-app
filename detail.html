@@ -9,32 +9,14 @@
 </head>
 <body>
   <div class="container dark-mode">
-    <div class="port-selector">
-      <h1>Serial Port Selector</h1>
-      <div id="port-list"></div>
-      <select id="ports"></select>
-      <button id="connect">Connect</button>
-    </div>
   
     <div id="transformer" >
-      <table id="transformerTable" class="display stripe" style="width:100%">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Current</th>
-            <th>Voltage/th>
-            <th>Temperature</th>
-          </tr>
-        </thead>
-      </table>
     </div>
-     <button id="ws-connect">Connect to WebSocket</button>
-    <button id="ws-send-message">Send WebSocket Message</button>
-    <!-- <p>Current: <span id="current">--</span></p>
+     
+    <p>Current: <span id="current">--</span></p>
     <p>Voltage: <span id="voltage">--</span></p>
     <p>Power: <span id="power">--</span></p>
-    <p>Temperature: <span id="temp">--</span></p> -->
+    <p>Temperature: <span id="temp">--</span></p>
   </div>
   <script src="renderer.js"></script>
   <script src="assets/resources/datatables.min.js"></script>
