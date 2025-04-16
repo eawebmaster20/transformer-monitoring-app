@@ -1,18 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const portList = document.getElementById('ports');
-    const connectButton = document.getElementById('connect');
+  const wsConnect = document.getElementById('ws-connect');
+  const portList = document.getElementById('ports');
+  const connectButton = document.getElementById('connect');
 	const table = $('#transformerTable').DataTable(); 
 
-    const ports = await window.serialAPI.listPorts();
-    ports.forEach(port => {
-      const option = document.createElement('option');
-      if(option){
-        option.value = port.path;
-        option.textContent = `${port.path} (${port.manufacturer || 'Unknown'})`;
-        portList.appendChild(option);
-      }
-    });
 
     // Connect to the selected port
     connectButton?.addEventListener('click', async () => {
@@ -74,17 +66,32 @@ document.addEventListener('DOMContentLoaded', async () => {
       option.value = port.path;
       option.textContent = `${port.path} (${port.manufacturer || 'Unknown'})`;
       portList = Object.values(portList).includes(option)? portList : portList.appendChild(option);
-      console.log(typeportList);
+      console.log(portList);
     });
 
     // Listen for disconnections
     window.serialAPI.onPortUnavailable((port) => {
       console.log('Port disconnected');
     });
+
+      // Listen for Port changes
+      window.serialAPI.onPortListChange((ports) => {
+        console.log('Port updated: ' ,ports);
+        portList.innerHTML = ''
+        ports.forEach(port => {
+        const option = document.createElement('option');
+        if(option){
+          option.value = port.path;
+          option.textContent = `${port.path} (${port.manufacturer || 'Unknown'})`;
+          portList.appendChild(option);
+        }
+      });
+      });
 	
-	  document.getElementById('ws-connect').addEventListener('click', async () => {
-		await window.serialAPI.connectToServer(); // Connect to the Socket.IO server
-		console.log('Connected to server');
+	  wsConnect.addEventListener('click', async () => {
+		const connectionStatus = await window.serialAPI.connectToServer(); // Connect to the Socket.IO server
+		console.log(connectionStatus);
+    if (connectionStatus) wsConnect.remove();
 	  });
 	  
 	  document.getElementById('ws-send-message').addEventListener('click', async () => {

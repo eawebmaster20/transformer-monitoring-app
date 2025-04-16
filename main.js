@@ -1,4 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+require('dotenv').config();
+const { app, BrowserWindow, ipcMain, Menu, dialog } = require('electron');
 const path = require('path');
 const { SerialPort } = require('serialport');
 const admin = require('firebase-admin');
@@ -9,23 +10,46 @@ let mainWindow;
 let currentPort;
 let socket;
 
-function connectSocket() {
-  socket = socketIOClient('https://node-socketio-production-cf7a.up.railway.app'); // Connect to Socket.IO server on localhost:3000
 
-  socket.on('connect', () => {
-    console.log('Connected to Socket.IO server');
-  });
+async function connectSocket() {
+  return new Promise((resolve, reject) => {
+    try {
+      socket = socketIOClient(process.env.SOCKET_SERVER_HOST);
 
-  socket.on('disconnect', () => {
-    console.log('Disconnected from Socket.IO server');
-  });
+      // Success: connected
+      socket.on('connect', () => {
+        console.log('Connected to Socket.IO server');
+        resolve(true);
+      });
 
-  socket.on('message', (data) => {
-    console.log('Message from server:', data);
+      // Fail (e.g. server unreachable)
+      socket.on('connect_error', (err) => {
+        console.error('Connection error:', err.message);
+        resolve(false);
+      });
+
+      socket.on('disconnect', () => {
+        console.log('Disconnected from Socket.IO server');
+      });
+
+      socket.on('message', (data) => {
+        console.log('Message from server:', data);
+      });
+    } catch (err) {
+      console.error('Unexpected connection error:', err);
+      resolve(false);
+    }
   });
 }
-app.on('ready', () => {
+
+// remove the default electron menu
+const menu = Menu.buildFromTemplate([])
+Menu.setApplicationMenu(menu)
+
+// Create the application's main window when the app is ready. This is the first event
+app.on('ready', async() => {
   mainWindow = new BrowserWindow({
+    alwaysOnTop: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -33,13 +57,51 @@ app.on('ready', () => {
     },
   });
 
-  mainWindow.loadFile('index.html');
+  secondWindow = new BrowserWindow(
+    {
+      width: 800,
+      height: 600,
+      minWidth: 800,
+      alwaysOnTop: true,
+      // parent: mainWindow,
+    }
+  ).loadURL('https://drive.google.com/file/u/0/d/1lx6S_9oo510jI-ZfYJN8pvMNN9Lad5Tc/view');
+  // mainWindow.loadFile('index.html');
   // mainWindow.webContents.openDevTools();
+
+  // Create a serial port object and make it available to the renderer
+  /* @variable for ports */
+  let ports;
+  const updatePorts = async () => {
+    const newPorts = await SerialPort.list();
+    if (ports?.length !== newPorts?.length) {
+      ports = newPorts;
+      // mainWindow.webContents.send('port-list-updated', ports)
+    }
+    else{
+      // mainWindow.webContents.send('port-list-updated', newPorts)
+    }
+ };
+
+  // Poll for updates every 5 seconds
+  setInterval(updatePorts, 5000);
+
+  const response = await connectSocket();
+  console.info('connection res :',response);
+
 });
 
-ipcMain.handle('connect-to-server', () => {
-  connectSocket();
+ipcMain.handle('file-picker', async() => {
+  const { canceled, filePaths } = await dialog.showOpenDialog()
+  console.log(canceled, filePaths)
 });
+
+// ipcMain.handle('connect-to-server', async() => {
+//   // console.log('Connecting to server');
+//   const response = await connectSocket()
+//   console.info(response);
+//   // return response
+// });
 
 ipcMain.handle('send-message', (event, message) => {
   if (socket) {
@@ -92,7 +154,7 @@ ipcMain.on('start-reading', (event, delimiter) => {
     const parser = currentPort.pipe(new DelimiterParser({ delimiter }));
   
     parser.on('data', data => {
-      mainWindow.webContents.send('serial-data', data.toString());
+      // mainWindow.webContents.send('serial-data', data.toString());
       console.log(data.toString());
     });
   });
